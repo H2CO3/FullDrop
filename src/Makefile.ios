@@ -1,0 +1,35 @@
+PROJECT = FullDrop
+
+OBJECTS = $(shell ./getobjname.sh)
+CC = arm-apple-darwin9-gcc
+LD = ${CC}
+CFLAGS = -isysroot /var/mobile/sysroot \
+	 -Wall \
+	 -std=gnu99 \
+	 -c
+LDFLAGS =-isysroot /var/mobile/sysroot \
+	 -w \
+	 -lobjc \
+	 -framework CoreFoundation \
+	 -framework Foundation \
+	 -framework CoreGraphics \
+	 -framework UIKit \
+	 -framework Security
+
+all: ../bld/${PROJECT}.app
+
+../bld/${PROJECT}.app: ${OBJECTS}
+	${LD} ${LDFLAGS} -o ${PROJECT} ${OBJECTS}
+	rm -rf ../bld/${PROJECT}.app
+	mkdir ../bld/${PROJECT}.app
+	cp ${PROJECT} ../bld/${PROJECT}.app
+	cp -r ../misc/Resources/* ../bld/${PROJECT}.app
+
+%.o: %.m
+	${CC} ${CFLAGS} -o $@ $^
+%.o: %.c
+#${CC} ${CFLAGS} -o $@ $^
+
+clean:
+	rm -rf ${OBJECTS} ../bld/${PROJECT}
+

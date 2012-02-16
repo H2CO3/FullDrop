@@ -1,0 +1,37 @@
+PROJECT = FullDrop
+IDEVICE = h2co3-iphone.local
+
+OBJECTS = $(shell ./getobjname.sh)
+TOOLCHAIN = /home/h2co3/ios-toolchain
+CC = ${TOOLCHAIN}/toolchain/pre/bin/arm-apple-darwin9-gcc
+LD = ${CC}
+CFLAGS = -Wall \
+	 -std=gnu99 \
+	 -c
+LDFLAGS =-w \
+	 -lobjc \
+	 -framework CoreFoundation \
+	 -framework Foundation \
+	 -framework CoreGraphics \
+	 -framework UIKit \
+	 -framework Security
+
+all: ../bld/${PROJECT}.app
+
+../bld/${PROJECT}.app: ${OBJECTS}
+	${LD} ${LDFLAGS} -o ${PROJECT} ${OBJECTS}
+	rm -rf ../bld/${PROJECT}.app
+	mkdir ../bld/${PROJECT}.app
+	cp ${PROJECT} ../bld/${PROJECT}.app
+	cp -r ../misc/Resources/* ../bld/${PROJECT}.app
+	sudo chmod -R 777 ../bld/${PROJECT}.app
+
+%.o: %.m
+	${CC} ${CFLAGS} -o $@ $^
+
+%.o: %.c
+	${CC} ${CFLAGS} -o $@ $^
+
+clean:
+	rm -rf ${OBJECTS}
+

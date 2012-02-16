@@ -1,0 +1,10 @@
+Package: org.h2co3.fulldrop
+Version: 1.9
+Name: FullDrop
+Section: Utilities
+Author: Árpád Goretity (H2CO3) <arpad.goretity@gmail.com>
+Maintainer: Árpád Goretity (H2CO3) <arpad.goretity@gmail.com>
+Description: FullDrop allows you to fully access your Dropbox account using your iPhone, including uploading files other than photos. A simple, web-based file viewer is also included, supporting PDFs, images, Office documents, audio files etc. Downloaded files will be placed to /var/mobile/Library/FullDrop. You can get/mail public links for your files from within the local web browser pointing to Dropbox.com. You can delete any local file from whithin the app by sliding it in the file list. Thanks for the Dropbox team for the iOS SDK and for approving my app.
+Architecture: iphoneos-arm
+Depiction: http://dropbox.com/
+

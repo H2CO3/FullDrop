@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo 'Fixing permissions...'
+chmod -R 777 /var/mobile/Library/FullDrop
+echo 'Done.'
+
